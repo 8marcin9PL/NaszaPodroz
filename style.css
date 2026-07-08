@@ -1,0 +1,848 @@
+:root{
+
+    --paper:#f6f1e8;
+    --paper2:#fdfbf7;
+
+    --ink:#2c2c2c;
+    --muted:#7b7468;
+
+    --gold:#c6a15b;
+
+    --shadow:0 18px 50px rgba(0,0,0,.10);
+
+    --radius:28px;
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+
+    width:100%;
+    height:100%;
+
+}
+
+body{
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color:var(--ink);
+
+    overflow:hidden;
+
+    background:
+
+        linear-gradient(
+            rgba(246,241,232,.35),
+            rgba(246,241,232,.35)
+        ),
+
+        url("assets/world-map.png");
+
+    background-size:cover;
+
+    background-position:center center;
+
+    background-repeat:no-repeat;
+
+}
+#app{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+.screen{
+
+    width:min(980px,90vw);
+
+    min-height:700px;
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:36px;
+
+    border:1px solid rgba(255,255,255,.35);
+
+    box-shadow:
+
+        0 30px 80px rgba(0,0,0,.12);
+
+    padding:70px;
+
+    text-align:center;
+
+    animation:fadeScreen .7s ease;
+
+    position:relative;
+
+}
+h1{
+
+    font-size:52px;
+
+    font-weight:700;
+
+    letter-spacing:-1px;
+
+    margin-bottom:20px;
+
+}
+
+h2{
+
+    font-size:34px;
+
+    font-weight:600;
+
+    margin-bottom:30px;
+
+}
+
+p{
+
+    font-size:22px;
+
+    line-height:1.8;
+
+    color:var(--muted);
+
+    margin:18px auto;
+
+    max-width:760px;
+
+}
+
+.question{
+
+    font-size:34px;
+
+    color:var(--ink);
+
+    line-height:1.5;
+
+    font-weight:500;
+
+}
+
+button{
+
+    margin-top:35px;
+
+    padding:18px 42px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+
+        180deg,
+
+        #d2b277,
+
+        #bb9654
+
+    );
+
+    color:white;
+
+    font-size:18px;
+
+    letter-spacing:.3px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:
+
+        0 12px 28px rgba(180,145,70,.30);
+
+}
+button:hover{
+
+    transform:
+
+        translateY(-3px);
+
+    box-shadow:
+
+        0 22px 40px rgba(180,145,70,.38);
+
+}
+
+.shuffle{
+
+    position:relative;
+
+    width:360px;
+
+    height:240px;
+
+    margin:50px auto;
+
+}
+
+.card{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    width:240px;
+
+    height:150px;
+
+    border-radius:22px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.back{
+
+    background:#d9ccb3;
+
+    animation:shuffleCards
+    1.2s infinite alternate;
+
+}
+
+.second{
+
+    animation-delay:.35s;
+
+}
+
+.front{
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:30px;
+
+    animation:
+    revealCard .9s ease forwards;
+
+    animation-delay:1.2s;
+
+    opacity:0;
+
+    transform:
+    translate(-50%,-50%)
+    scale(.8);
+
+}
+
+.question-card{
+
+    width:560px;
+
+    height:320px;
+
+    margin:40px auto;
+
+    perspective:1400px;
+
+}
+
+.question-inner{
+
+    width:100%;
+
+    height:100%;
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    transition:
+    transform .9s;
+
+}
+
+.flip .question-inner{
+
+    transform:
+    rotateY(180deg);
+
+}
+
+.question-front,
+.question-back{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:28px;
+
+    backface-visibility:hidden;
+
+    background:white;
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:45px;
+
+}
+
+.question-front{
+
+    background:#faf7f1;
+
+}
+
+.question-front span{
+
+    font-size:64px;
+
+    margin-bottom:20px;
+
+}
+
+.question-back{
+
+    transform:rotateY(180deg);
+
+}
+@keyframes fadeScreen{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+@keyframes shuffleCards{
+
+    from{
+
+        transform:
+        translate(-58%,-50%)
+        rotate(-8deg);
+
+    }
+
+    to{
+
+        transform:
+        translate(-42%,-50%)
+        rotate(8deg);
+
+    }
+
+}
+
+@keyframes revealCard{
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,-50%)
+        scale(1);
+
+    }
+
+}
+
+.screen::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:36px;
+
+    border:1px solid rgba(198,161,91,.18);
+
+    pointer-events:none;
+
+}
+
+.screen::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border-radius:26px;
+
+    border:1px solid rgba(198,161,91,.08);
+
+    pointer-events:none;
+
+}
+
+button+button{
+
+    margin-left:18px;
+
+}
+
+button:focus{
+
+    outline:none;
+
+}
+
+.question-front p{
+
+    color:var(--muted);
+
+    font-size:20px;
+
+    margin-top:15px;
+
+}
+
+.question-back .question{
+
+    margin:0;
+
+    font-size:30px;
+
+    line-height:1.55;
+
+}
+
+h1{
+
+    position:relative;
+
+}
+
+h1::after{
+
+    content:"";
+
+    display:block;
+
+    width:80px;
+
+    height:3px;
+
+    background:var(--gold);
+
+    border-radius:999px;
+
+    margin:18px auto 0;
+
+    opacity:.45;
+
+}
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#d6c5a2;
+
+    border-radius:999px;
+
+}
+
+@media(max-width:900px){
+
+    .screen{
+
+        width:96vw;
+
+        min-height:auto;
+
+        padding:40px 28px;
+
+    }
+
+    h1{
+
+        font-size:38px;
+
+    }
+
+    h2{
+
+        font-size:28px;
+
+    }
+
+    p{
+
+        font-size:18px;
+
+    }
+
+    .question{
+
+        font-size:24px;
+
+    }
+
+    .question-card{
+
+        width:100%;
+
+        height:260px;
+
+    }
+
+    .shuffle{
+
+        transform:scale(.82);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    button{
+
+        width:100%;
+
+        margin-left:0!important;
+
+    }
+
+    button+button{
+
+        margin-top:14px;
+
+    }
+
+}
+.passport-bar{
+
+    position:absolute;
+
+    top:24px;
+
+    left:24px;
+
+    right:24px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 22px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.45);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(198,161,91,.18);
+
+    z-index:100;
+
+}
+
+.passport-title{
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    color:#8d7b61;
+
+    font-weight:700;
+
+}
+
+.passport-sub{
+
+    font-size:15px;
+
+    color:#444;
+
+    margin-top:4px;
+
+}
+
+.passport-stamps{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.stamp{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(0,0,0,.05);
+
+    filter:grayscale(1);
+
+    opacity:.28;
+
+    transition:.45s;
+
+    font-size:20px;
+
+}
+
+.stamp.done{
+
+    background:#d9bc82;
+
+    filter:none;
+
+    opacity:1;
+
+    transform:rotate(-8deg) scale(1.08);
+
+    box-shadow:0 8px 20px rgba(198,161,91,.28);
+
+}
+
+.passport-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    backdrop-filter:blur(8px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.45s;
+
+    z-index:999;
+
+}
+
+.passport-modal.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+.passport-book{
+
+    width:900px;
+
+    max-width:92vw;
+
+    height:560px;
+
+    background:#f8f3ea;
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    box-shadow:
+
+        0 40px 90px rgba(0,0,0,.25);
+
+    transform:
+
+        scale(.92) rotateX(8deg);
+
+    transition:.45s;
+
+}
+
+.passport-modal.show .passport-book{
+
+    transform:
+
+        scale(1) rotateX(0);
+
+}
+
+.passport-left{
+
+    padding:60px;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #c9a869,
+
+            #b28b4d
+
+        );
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.passport-left h2{
+
+    font-size:42px;
+
+    letter-spacing:6px;
+
+    margin-bottom:40px;
+
+}
+
+.passport-left p{
+
+    color:white;
+
+    font-size:22px;
+
+    margin:12px 0;
+
+.passport-right{
+
+    padding:60px;
+
+    background:#fcfaf5;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.passport-right h3{
+
+    margin-bottom:30px;
+
+}
+
+.passport-right p{
+
+    margin:16px 0;
+
+    font-size:22px;
+
+}
+
+.passport-right button{
+
+    margin-top:40px;
+
+}
+
+.passport-title{
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.passport-title:hover{
+
+    transform:translateY(-2px);
+
+    color:#b28b4d;
+
+}
+
+#closePassport{
+
+    margin-top:auto;
+
+}
